@@ -17,3 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/listerMangas', [MangaController::class, 'listerMangas']);
+
+Route::get('/ajouterMangas', [MangaController::class, 'ajouterManga']);
