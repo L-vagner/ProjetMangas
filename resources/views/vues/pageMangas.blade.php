@@ -17,27 +17,21 @@
                 <th><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Supprimer"></span></th>
             </tr>
             </thead>
-            <tbody>
+{{--            <tbody>--}}
                 @foreach($desMangas as $unManga)
                 <tr>
-                    <td class="col-xs-2">
-                        <p>{{$unManga->titre}}</p>
+                    <td class="col-xs-2"><p>{{$unManga->titre}}</p>
                     </td>
-                    <td class="col-xs-2">
-                        <p>{{$unManga->lib_genre}}</p>
+                    <td class="col-xs-2"><p>{{$unManga->lib_genre}}</p>
                     </td>
-                    <td class="col-xs-2">
-                        <p>{{$unManga->nom_dessinateur}}</p>
+                    <td class="col-xs-2"><p>{{$unManga->nom_dessinateur}}</p>
                     </td>
-                    <td class="col-xs-2">
-                        <p>{{$unManga->nom_scenariste}}</p>
+                    <td class="col-xs-2"><p>{{$unManga->nom_scenariste}}</p>
                     </td>
-                    <td class="col-xs-2">
-                        <p>{{$unManga->prix}}</p>
+                    <td class="col-xs-2"><p>{{$unManga->prix}}</p>
                     </td>
-                    <td class="col-xs-2">
-                        <img class="img-rounded" src="{{asset($unManga->couverture)}}"
-                             style="max-height: 150px;">
+                    <td class="col-xs-2"><img class="img-rounded"
+                                              src="{{asset('assets/images/'.$unManga->couverture)}}" style="max-height: 150px;">
                     </td>
                     <td style="text-align:center;">
                         <a href="{{url('/modifierManga/'.$unManga->id_manga)}}">
@@ -54,7 +48,7 @@
                     </td>
                 </tr>
                 @endforeach
-            </tbody>
+{{--            </tbody>--}}
         </table>
     </div>
 @stop

@@ -33,7 +33,7 @@
     </nav>
 </div>
 <div class="container">
-
+ @yield('content')
 </div>
 {!! Html::script('assets/js/jsquery-3.1.1.js') !!}
 {!! Html::script('assets/js/bootstrap.js') !!}

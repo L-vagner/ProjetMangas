@@ -12,7 +12,7 @@ class ServiceManga
     public function getMangasAvecNoms()
     {
         try {
-            $mangas = DB::table('mangas')
+            $mangas = DB::table('manga')
                 ->select('id_manga', 'titre', 'prix', 'couverture',
                     'genre.lib_genre', 'dessinateur.nom_dessinateur', 'scenariste.nom_scenariste')
                 ->join('genre', 'genre.id_genre', '=', 'manga.id_genre')
