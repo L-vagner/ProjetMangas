@@ -16,13 +16,28 @@
                 <br><br>
 
                 <div class="form-group">
+                    <label class="col-md-3 control-label">Genre :</label>
+                    <div class="col-md-6">
+                        <select class="form-control" name="sel_dessi" id="id_dessinateur">
+                            <option value="0" disabled selected="selected">Sélectionner un genre</option>
+                            @foreach ($genres as $unG)
+                                <option value="{{$unG->id_genre}}">
+                                    {{$unG->lib_genre}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <br><br>
+
+                <div class="form-group">
                     <label class="col-md-3 control-label">Dessinateur :</label>
                     <div class="col-md-6">
                         <select class="form-control" name="sel_dessi" id="id_dessinateur">
                             <option value="0" disabled selected="selected">Sélectionner un dessinateur</option>
-                            @foreach ($dessinateur as $unD)
-                                <option value="{{$unD->id_genre}}">
-                                    {{$unD->lib_genre}}
+                            @foreach ($dessinateurs as $unD)
+                                <option value="{{$unD->id_dessinateur}}">
+                                    {{$unD->prenom_dessinateur .' '. $unD->nom_dessinateur}}
                                 </option>
                             @endforeach
                         </select>
@@ -36,8 +51,8 @@
                         <select class="form-control" name="sel_scena" id="id_scenariste">
                             <option value="0" disabled selected="selected">Sélectionner un scenariste</option>
                             @foreach ($scenaristes as $unS)
-                                <option value="{{$unS->id_genre}}">
-                                    {{$unS->lib_genre}}
+                                <option value="{{$unS->id_scenariste}}">
+                                    {{$unS->prenom_scenariste.' '.$unS->nom_scenariste}}
                                 </option>
                             @endforeach
                         </select>
@@ -65,6 +80,17 @@
                         </button>
                     </div>
                 </div>
+                <br><br>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Couverture : </label>
+                    <div class="col-md-6">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="204800"/>
+                        <input type="file" accept="image/*" name="fil_couv"
+                               class="btn btn-default btn-primary pull-left">
+                    </div>
+                </div>
+                <br><br>
             </div>
         </div>
     </div>

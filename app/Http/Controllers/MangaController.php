@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\dao\ServiceScenariste;
+use App\dao\ServiceDessinateur;
 use App\dao\ServiceGenre;
 use Exception;
 use App\dao\ServiceManga;
@@ -29,7 +31,9 @@ class MangaController extends Controller
     {
         try {
         $genres = ServiceGenre::getGenre();
-            return view('vues/formManga', compact('genres'));
+        $dessinateurs = ServiceDessinateur::getDessinateur();
+        $scenaristes = ServiceScenariste::getScenariste();
+            return view('vues/formManga', compact('genres', 'dessinateurs', 'scenaristes'));
         } catch (Exception $e) {
             $erreur = $e->getMessage();
             return view('vues/pagesErreur', compact('erreur'));

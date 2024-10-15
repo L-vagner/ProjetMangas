@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MangaController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,4 +19,6 @@ Route::get('/', function () {
 });
 Route::get('/listerMangas', [MangaController::class, 'listerMangas']);
 
-Route::get('/ajouterMangas', [MangaController::class, 'ajouterManga']);
+Route::get('/ajouterManga', [MangaController::class, 'ajouterManga']);
+
+Route::post('/validerManga', [MangaController::class, 'validerManga'])->name('postManga');
