@@ -13,12 +13,14 @@
                 <th>Scenariste</th>
                 <th>Prix</th>
                 <th>Couververture</th>
-                <th><span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="Modifier"></span></th>
-                <th><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="Supprimer"></span></th>
+                <th><span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top"
+                          title="Modifier"></span></th>
+                <th><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top"
+                          title="Supprimer"></span></th>
             </tr>
             </thead>
-{{--            <tbody>--}}
-                @foreach($desMangas as $unManga)
+            <tbody>
+            @foreach($desMangas as $unManga)
                 <tr>
                     <td class="col-xs-2"><p>{{$unManga->titre}}</p>
                     </td>
@@ -31,10 +33,11 @@
                     <td class="col-xs-2"><p>{{$unManga->prix}}</p>
                     </td>
                     <td class="col-xs-2"><img class="img-rounded"
-                                              src="{{asset('assets/images/'.$unManga->couverture)}}" style="max-height: 150px;">
+                                              src="{{asset('assets/images/'.$unManga->couverture)}}"
+                                              style="max-height: 150px;">
                     </td>
                     <td style="text-align:center;">
-                        <a href="{{url('/modifierManga/'.$unManga->id_manga)}}">
+                        <a href="{{ route('majManga', [$unManga->id_manga]) }}">
                             <span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top"
                                   title="Modifier"></span>
                         </a>
@@ -47,8 +50,8 @@
                         </a>
                     </td>
                 </tr>
-                @endforeach
-{{--            </tbody>--}}
+            @endforeach
+            </tbody>
         </table>
     </div>
 @stop

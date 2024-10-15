@@ -8,5 +8,5 @@ class Manga extends Model
 {
     protected $table ='manga';
     protected $primaryKey='id_manga';
-    protected $timestamps=false;
+    public $timestamps=false;
 }

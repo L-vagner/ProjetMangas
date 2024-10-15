@@ -22,3 +22,5 @@ Route::get('/listerMangas', [MangaController::class, 'listerMangas']);
 Route::get('/ajouterManga', [MangaController::class, 'ajouterManga']);
 
 Route::post('/validerManga', [MangaController::class, 'validerManga'])->name('postManga');
+
+Route::get('/modifierManga/{id}', [MangaController::class, 'modifierManga'])->name('majManga');
