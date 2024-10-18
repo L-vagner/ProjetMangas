@@ -20,7 +20,7 @@
                     <label class="col-md-3 control-label">Genre :</label>
                     <div class="col-md-6">
                         <select class="form-control" name="sel_genre" id="id_genre">
-                            <option value="0" disabled >Sélectionner un genre</option>
+                            <option value="0" disabled selected >Sélectionner un genre</option>
                             @foreach ($genres as $unG)
                                 <option value="{{$unG->id_genre}}"
                                 @if ($unG->id_genre == $manga->id_genre)
@@ -40,7 +40,7 @@
                     <label class="col-md-3 control-label">Dessinateur :</label>
                     <div class="col-md-6">
                         <select class="form-control" name="sel_dessi" id="id_dessinateur">
-                            <option value="0" disabled >Sélectionner un dessinateur</option>
+                            <option value="0" disabled selected>Sélectionner un dessinateur</option>
                             @foreach ($dessinateurs as $unD)
                                 <option value="{{$unD->id_dessinateur}}"
                                         @if ($unD->id_dessinateur == $manga->id_dessinateur)
@@ -58,7 +58,7 @@
                     <label class="col-md-3 control-label">Scénariste :</label>
                     <div class="col-md-6">
                         <select class="form-control" name="sel_scena" id="id_scenariste">
-                            <option value="0" disabled >Sélectionner un scenariste</option>
+                            <option value="0" disabled selected>Sélectionner un scenariste</option>
                             @foreach ($scenaristes as $unS)
                                 <option value="{{$unS->id_scenariste}}"
                                         @if ($unS->id_scenariste == $manga->id_scenariste)
@@ -87,7 +87,7 @@
                         </button>
                         &nbsp;
                         <button type="button" class="btn btn-default btn-primary"
-                                onclick="{ window.location = '{{ url('/') }}';}">
+                                onclick="{ window.location = '{{ route('home') }}';}">
                             <span class="glyphicon glyphicon-remove"></span>Annuler
                         </button>
                     </div>

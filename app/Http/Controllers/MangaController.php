@@ -16,13 +16,14 @@ class MangaController extends Controller
     {
         try {
             $serviceManga = new ServiceManga();
+            $title = "Liste de mangas";
             $desMangas = $serviceManga->getMangasAvecNoms();
             foreach ($desMangas as $unManga) {
                 if (!file_exists('assets\\images\\' . $unManga->couverture)) {
                     $unManga->couverture = 'erreur.png';
                 }
             }
-            return view('vues/pageMangas', compact('desMangas'));
+            return view('vues/pageMangas', compact('desMangas', 'title'));
         } catch (Exception $e) {
             $erreur = $e->getMessage();
             return view('vues/pageErreur', compact('erreur'));
@@ -37,7 +38,7 @@ class MangaController extends Controller
             $dessinateurs = ServiceDessinateur::getDessinateur();
             $scenaristes = ServiceScenariste::getScenariste();
             $manga = new Manga();
-            return view('vues/formManga', compact('title', 'manga','genres', 'dessinateurs', 'scenaristes'));
+            return view('vues/formManga', compact('title', 'manga', 'genres', 'dessinateurs', 'scenaristes'));
         } catch (Exception $e) {
             $erreur = $e->getMessage();
             return view('vues/pageErreur', compact('erreur'));
@@ -63,10 +64,10 @@ class MangaController extends Controller
             $couv = $request->file('fil_couv');
             if (isset($couv)) {
                 $manga->couverture = $couv->getClientOriginalName();
-                $couv->move(public_path() . '/assets/images/' . $manga->couverture);
+                $couv->move(public_path() . '/assets/images/', $manga->couverture);
             }
             $serviceManga->saveManga($manga);
-            return redirect('listerMangas');
+            return redirect()->route('mangas');
         } catch (Exception $e) {
             $erreur = $e->getMessage();
             return view('vues/pageErreur', compact('erreur'));
@@ -83,6 +84,50 @@ class MangaController extends Controller
             $dessinateurs = ServiceDessinateur::getDessinateur();
             $scenaristes = ServiceScenariste::getScenariste();
             return view('vues/formManga', compact('title', 'manga', 'genres', 'dessinateurs', 'scenaristes'));
+        } catch (Exception $e) {
+            $erreur = $e->getMessage();
+            return view('vues/pageErreur', compact('erreur'));
+        }
+    }
+
+    public function supprimerManga($id)
+    {
+        try {
+            $serviceManga = new ServiceManga();
+            $serviceManga->delManga($id);
+            return redirect()->route('mangas');
+        } catch (Exception $e) {
+            $erreur = $e->getMessage();
+            return view('vues/pageErreur', compact('erreur'));
+        }
+    }
+
+    public function formListerMangaGenre()
+    {
+        try {
+            $mesGenres = ServiceGenre::getGenre();
+            return view('vues/formListeMangaGenre', compact('mesGenres'));
+        } catch (Exception $e) {
+            $erreur = $e->getMessage();
+            return view('vues/pageErreur', compact('erreur'));
+        }
+    }
+
+    public function listerMangasGenre(Request $request)
+    {
+        try {
+
+            $id_genre = $request->input('sel_genre');
+            $lib_genre = ServiceGenre::getLibGenre($id_genre);
+            $serviceManga = new ServiceManga();
+            $desMangas = $serviceManga->getMangaAvecGenre($id_genre);
+            foreach ($desMangas as $unManga) {
+                if (!file_exists('assets\\images\\' . $unManga->couverture)) {
+                    $unManga->couverture = 'erreur.png';
+                }
+            }
+            $title = "Liste des Mangas du genre : " . $lib_genre->lib_genre;
+            return view('vues/pageMangas', compact('desMangas', 'title'));
         } catch (Exception $e) {
             $erreur = $e->getMessage();
             return view('vues/pageErreur', compact('erreur'));

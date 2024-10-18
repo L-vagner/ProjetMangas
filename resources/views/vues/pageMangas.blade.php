@@ -2,7 +2,7 @@
 @section('content')
     <div class="container">
         <div class="blanc">
-            <h1>Liste de mangas</h1>
+            <h1>{{ $title }}</h1>
         </div>
         <table class="table table-bordered table-striped">
             <thead>
@@ -34,7 +34,8 @@
                     </td>
                     <td class="col-xs-2"><img class="img-rounded"
                                               src="{{asset('assets/images/'.$unManga->couverture)}}"
-                                              style="max-height: 150px;">
+                                              style="max-height: 150px;"
+                                              alt="couverture de {{$unManga->titre}}">
                     </td>
                     <td style="text-align:center;">
                         <a href="{{ route('majManga', [$unManga->id_manga]) }}">
@@ -44,7 +45,7 @@
                     </td>
                     <td>
                         <a onclick="return confirm('vous êtes sûr de vouloir supprimer?')"
-                           href="/supprimerManga/{{$unManga->id_manga}}">
+                           href="{{route('remManga', [$unManga->id_manga])}}">
                             <span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top"
                                   title="Supprimer"></span>
                         </a>

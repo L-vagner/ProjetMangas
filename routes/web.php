@@ -16,11 +16,17 @@ use App\Http\Controllers\MangaController;
 
 Route::get('/', function () {
     return view('welcome');
-});
-Route::get('/listerMangas', [MangaController::class, 'listerMangas']);
+})->name('home');
+Route::get('/listerMangas', [MangaController::class, 'listerMangas'])->name('mangas');
 
-Route::get('/ajouterManga', [MangaController::class, 'ajouterManga']);
+Route::get('/ajouterManga', [MangaController::class, 'ajouterManga'])->name('insManga');
 
 Route::post('/validerManga', [MangaController::class, 'validerManga'])->name('postManga');
 
 Route::get('/modifierManga/{id}', [MangaController::class, 'modifierManga'])->name('majManga');
+
+Route::get('/supprimerManga/{id}', [MangaController::class, 'supprimerManga'])->name('remManga');
+
+Route::get('/formMangasGenre', [MangaController::class, 'formListerMangaGenre'])->name('searchMangaGenre');
+
+Route::post('/listerMangasGenres', [MangaController::class, 'listerMangasGenre'])->name('postMangaGenre');

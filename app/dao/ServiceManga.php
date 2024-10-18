@@ -18,6 +18,7 @@ class ServiceManga
                 ->join('genre', 'genre.id_genre', '=', 'manga.id_genre')
                 ->join('dessinateur', 'dessinateur.id_dessinateur', '=', 'manga.id_dessinateur')
                 ->join('scenariste', 'scenariste.id_scenariste', '=', 'manga.id_scenariste')
+                ->orderBy('id_manga')
                 ->get();
             return $mangas;
         } catch (QueryException $e) {
@@ -34,14 +35,11 @@ class ServiceManga
             $erreur = $e->getMessage();
             if ($manga->id_genre == 0) {
                 $erreur = "Vous devez sélectionnez un genre";
-            }
-            else if ($manga->id_dessinateur == 0) {
+            } else if ($manga->id_dessinateur == 0) {
                 $erreur = "Vous devez sélectionnez un dessinateur";
-            }
-            else if ($manga->id_scenariste == 0) {
+            } else if ($manga->id_scenariste == 0) {
                 $erreur = "Vous devez sélectionnez un scénariste";
-            }
-            else if (!isset($manga->couverture)) {
+            } else if (!isset($manga->couverture)) {
                 $erreur = "Vous devez choisir une image de couverture";
             }
             throw new MonException($erreur, 5);
@@ -53,6 +51,24 @@ class ServiceManga
         try {
             return Manga::query()
                 ->findOrFail($id);
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
+
+    public function delManga($id)
+    {
+        try {
+            Manga::destroy($id);
+        } catch (QueryException $e) {
+            throw new MonException($e->getMessage(), 5);
+        }
+    }
+
+    public function getMangaAvecGenre($id)
+    {
+        try {
+            return Manga::all()->where('id_genre', '=', $id);
         } catch (QueryException $e) {
             throw new MonException($e->getMessage(), 5);
         }
