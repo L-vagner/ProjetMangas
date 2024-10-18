@@ -27,6 +27,8 @@ Route::get('/modifierManga/{id}', [MangaController::class, 'modifierManga'])->na
 
 Route::get('/supprimerManga/{id}', [MangaController::class, 'supprimerManga'])->name('remManga');
 
-Route::get('/formMangasGenre', [MangaController::class, 'formListerMangaGenre'])->name('searchMangaGenre');
+Route::get('/formMangasGenre', [MangaController::class, 'formListerMangaGenre'])->name('selGenre');
 
-Route::post('/listerMangasGenres', [MangaController::class, 'listerMangasGenre'])->name('postMangaGenre');
+Route::post('/postMangaGenre', [MangaController::class, 'validerGenre'])->name('postGenre');
+
+Route::get('/listerMangasGenre/{id}', [MangaController::class, 'listerMangasGenre'])->name('mangasGenre');

@@ -9,6 +9,7 @@ use App\Models\Manga;
 use Exception;
 use App\dao\ServiceManga;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class MangaController extends Controller
 {
@@ -74,7 +75,7 @@ class MangaController extends Controller
         }
     }
 
-    public function modifierManga($id)
+    public function modifierManga($id) // route name : majManga
     {
         try {
             $title = "Modifier un manga";
@@ -90,7 +91,7 @@ class MangaController extends Controller
         }
     }
 
-    public function supprimerManga($id)
+    public function supprimerManga($id) // route name : remManga
     {
         try {
             $serviceManga = new ServiceManga();
@@ -102,22 +103,42 @@ class MangaController extends Controller
         }
     }
 
-    public function formListerMangaGenre()
+    public function formListerMangaGenre() // route name : selGenre
     {
         try {
+            $erreur = "";
+            if (Session::get('erreur')) {
+                $erreur = Session::get('erreur');
+            }
+            Session::forget('erreur');
             $mesGenres = ServiceGenre::getGenre();
-            return view('vues/formListeMangaGenre', compact('mesGenres'));
+            return view('vues/formListeMangaGenre', compact('mesGenres', 'erreur'));
         } catch (Exception $e) {
             $erreur = $e->getMessage();
             return view('vues/pageErreur', compact('erreur'));
         }
     }
 
-    public function listerMangasGenre(Request $request)
+    public function validerGenre(Request $request) // route name : postGenre
     {
         try {
-
+            $erreur = "";
             $id_genre = $request->input('sel_genre');
+            if ($id_genre == 0) {
+                $erreur = "Vous devez selectionner un genre";
+                Session::put('erreur', $erreur);
+                return redirect()->route('selGenre');
+            }
+            return redirect()->route('mangasGenre',['id'=>$id_genre]);
+        } catch (Exception $e) {
+            $erreur = $e->getMessage();
+            return view('vues/pageErreur', compact('erreur'));
+        }
+    }
+
+    public function listerMangasGenre($id_genre) // route name : mangasGenre
+    {
+        try {
             $lib_genre = ServiceGenre::getLibGenre($id_genre);
             $serviceManga = new ServiceManga();
             $desMangas = $serviceManga->getMangaAvecGenre($id_genre);

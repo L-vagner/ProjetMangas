@@ -5,7 +5,7 @@
             <div class="blanc">
                 <h1>Liste des mangas par genre</h1>
             </div>
-            {!!  Form::open(['route' => 'postMangaGenre']) !!}
+            {!!  Form::open(['route' => 'postGenre']) !!}
             <div class="col-md-9 well well-sm">
                 <div class="form-group">
                     <label class="col-md-3 control-label">Genre :</label>
@@ -37,5 +37,6 @@
                 <br><br>
             </div>
         </div>
+        @include('vues/erreur')
     </div>
 @stop
